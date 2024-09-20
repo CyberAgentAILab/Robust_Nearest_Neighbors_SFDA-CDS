@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "usfda"
+version = "0.1.0"
+description = ""
+authors = ["antonio-t <antonio_tejero@cyberagent.co.jp>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+torch = "2.0.0"
+torchvision = "0.15.1"
+scikit-learn = "1.2.2"
+wandb = "^0.15.9"
+byol-pytorch = "^0.6.0"
+transformers = "^4.34.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
