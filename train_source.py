@@ -4,7 +4,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 import torch.backends.cudnn as cudnn
 import random
-from model import *
+from model import Resnet
 import argparse
 import numpy as np
 import torchvision.transforms as transforms
@@ -13,8 +13,8 @@ import pickle
 import time
 from sklearn.metrics import accuracy_score
 from torch.optim.lr_scheduler import *
-from utils import *
-from datasets import *
+from utils import save_weights
+from datasets import dataset
 from os.path import join
 from os import makedirs
 
@@ -160,7 +160,7 @@ elif dataset_name == 'domainnet':
     elif args.run_name[-4:] == "mini":
         imbalanced = "mini"
     else:
-        print("ERROR: Unknown config for domainnet %s" % imbalanced)
+        print("ERROR: Unknown config for domainnet")
         exit()
 else:
     print("ERROR: Unknown dataset %s" % dataset_name)

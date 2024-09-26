@@ -13,12 +13,12 @@ import pickle
 import time
 from sklearn.metrics import accuracy_score
 from torch.optim.lr_scheduler import *
-from utils import *
+from utils import load_weights, save_weights
 from os.path import join
 from os import makedirs
-from datasets import *
-from model import *
-from moco import *
+from datasets import dataset
+from model import Resnet
+from moco import AdaMoCo
 
 from transformers import SwinModel
 
@@ -210,7 +210,6 @@ def soft_k_nearest_neighbors_threshold(features, features_gen, features_bank, fe
 def soft_k_nearest_neighbors_src(features, features_gen, features_bank, features_gen_bank, probs_bank, labels, labels_bank):
     pred_probs = []
     pred_probs_all = []
-    avg_nn = 0
     
     for feats, feats_gen in zip(features.split(64), features_gen.split(64)):
         distances = get_distances(feats, features_bank)
@@ -240,7 +239,6 @@ def soft_k_nearest_neighbors_src(features, features_gen, features_bank, features
 def soft_k_nearest_neighbors_gen(features, features_gen, features_bank, features_gen_bank, probs_bank, labels, labels_bank):
     pred_probs = []
     pred_probs_all = []
-    avg_nn = 0
     
     for feats, feats_gen in zip(features.split(64), features_gen.split(64)):
         distances_gen = get_distances(feats_gen, features_gen_bank)
@@ -517,7 +515,7 @@ elif dataset_name == 'domainnet':
     elif args.source[-4:] == "mini":
         imbalanced = "mini"
     else:
-        print("ERROR: Unknown config for domainnet %s" % imbalanced)
+        print("ERROR: Unknown config for domainnet")
         exit()
 else:
     print("ERROR: Unknown dataset %s" % dataset_name)

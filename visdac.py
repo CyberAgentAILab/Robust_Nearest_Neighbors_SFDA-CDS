@@ -3,9 +3,7 @@ from PIL import Image
 import os
 import os.path
 import numpy as np
-import sys
 import torch.utils.data as data
-import glob
 
 class VISDAC(data.Dataset):
     def __init__(self, root, imbalanced, domain, train=True, transform=None, from_file=False):
@@ -40,11 +38,6 @@ class VISDAC(data.Dataset):
                         data.append(sample)
                         labels.append(int(label))
             else:
-                #NEWclass_names = ['aeroplane','bicycle','bus','car','horse','knife','motorcycle','person','plant','skateboard','train','truck']
-                #NEWfor c in range(12):
-                #NEW    files = glob.glob(os.path.join(root,domain,class_names[c],"*"))
-                #NEW    data.extend(files)
-                #NEW    labels.extend([c]*len(files))
                 if domain == 'train':# and self.train:
                     file_path = '../SSISFDA/data/Imbalanced/VISDA-C/image_list_train.txt'
                 elif domain == 'validation':
