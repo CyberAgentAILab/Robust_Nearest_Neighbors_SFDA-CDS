@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "usfda"
 version = "0.1.0"
-description = ""
+description = "Implementation of the ECCV2024 paper: Robust Nearest Neighbors for Source-Free Domain Adaptation under Class Distribution Shift"
 authors = ["antonio-t <antonio_tejero@cyberagent.co.jp>"]
 readme = "README.md"
 
